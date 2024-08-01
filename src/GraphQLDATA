@@ -1,0 +1,97 @@
+//QUERY
+
+query($characterId: Int!,$episodeId: Int! )
+
+{
+  character(characterId:$characterId) 
+  {
+    name
+    gender
+    status
+    id
+  }
+  
+  location(locationId:11875)
+  {    
+    name
+    dimension
+  }
+  
+  episode(episodeId:$episodeId) 
+  {
+    name
+    air_date
+    episode
+  }
+  
+  characters(filters: { name:"Rahul"})  
+  {
+    info
+    {
+      count
+    }
+    
+    result
+    {
+      name
+      type
+    }
+  }
+  
+  episodes(filters:{episode:"hulu"})
+  {
+    result
+    {
+      id
+      name
+      air_date
+      episode
+    }
+  }
+}
+
+Query Params
+
+{
+  "characterId": 7708,
+  "episodeId":9264
+  
+}
+
+
+//MUTATION
+
+
+mutation($locationName:String!, $characterName:String!, $episodeName:String!)
+{
+  createLocation(location : {name:$locationName, type:"South", dimension:"234"})
+  {
+    id
+  }
+  createCharacter(character: {name:$characterName, type:"Macho", status:"Alive", species:"fantasy", gender:"Male", image:"png", locationId:11869, originId:11869})
+  {
+    id
+  }
+  createEpisode(episode:{name:$episodeName, air_date:"29-04-1993", episode:"Prime"})
+  {
+    id
+  }
+  
+  deleteLocations(locationIds:[11872,11873])
+  {
+    locationsDeleted
+  }
+}
+
+
+
+Query Params
+
+{
+  "locationName": "India",
+  "characterName" : "Veeresh",
+  "episodeName": "KGF"
+  
+}
+	
+	
